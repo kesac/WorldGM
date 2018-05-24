@@ -21,5 +21,47 @@ namespace WorldGM.DataConsole
             return existing;
         }
 
+        public static Region EnsureRegionExists(this AppContext db, World parentWorld, string regionName)
+        {
+            var existing = db.Regions.FirstOrDefault(x => x.Name == regionName);
+
+            if (existing == null)
+            {
+                db.Regions.Add(new Region { Name = regionName, WorldId = parentWorld.Id });
+                db.SaveChanges();
+                existing = db.Regions.FirstOrDefault(x => x.Name == regionName);
+            }
+
+            return existing;
+        }
+
+        public static City EnsureCityExists(this AppContext db, Region parentRegion, string cityName)
+        {
+            var existing = db.Cities.FirstOrDefault(x => x.Name == cityName);
+
+            if (existing == null)
+            {
+                db.Cities.Add(new City { Name = cityName, RegionId = parentRegion.Id });
+                db.SaveChanges();
+                existing = db.Cities.FirstOrDefault(x => x.Name == cityName);
+            }
+
+            return existing;
+        }
+
+        public static Team EnsureTeamExists(this AppContext db, City parentCity, string teamName)
+        {
+            var existing = db.Teams.FirstOrDefault(x => x.Name == teamName);
+
+            if (existing == null)
+            {
+                db.Teams.Add(new Team { Name = teamName, CityId = parentCity.Id});
+                db.SaveChanges();
+                existing = db.Teams.FirstOrDefault(x => x.Name == teamName);
+            }
+
+            return existing;
+        }
+
     }
 }

@@ -13,14 +13,46 @@ namespace WorldGM.DataConsole
             XmlDocument xml = new XmlDocument();
             xml.Load(@"E:\Projects\C#\WorldGM\WorldGM.DataConsole\World.xml");
 
-            var root = xml.FirstChild;
+            var worldNode = xml.FirstChild;
 
             using(var db = new AppContext())
             {
-                if(root.Name == "world")
+                if(worldNode.Name == "world")
                 {
-                    var worldName = root.Attributes["name"].Value;
+                    var worldName = worldNode.Attributes["name"].Value;
                     var world = db.EnsureWorldExists(worldName);
+
+                    foreach(XmlNode regionNode in worldNode.ChildNodes)
+                    {
+                        if (regionNode.Name == "region")
+                        {
+                            var regionName = regionNode.Attributes["name"].Value;
+                            var region = db.EnsureRegionExists(world, regionName);
+
+                            foreach(XmlNode cityNode in regionNode.ChildNodes)
+                            {
+                                if(cityNode.Name == "city")
+                                {
+                                    var cityName = cityNode.Attributes["name"].Value;
+                                    var city = db.EnsureCityExists(region, cityName);
+
+                                    city.Population = int.Parse(cityNode.Attributes["population"].Value);
+                                    db.SaveChanges();
+
+                                    foreach(XmlNode teamNode in cityNode.ChildNodes)
+                                    {
+                                        if(teamNode.Name == "team")
+                                        {
+                                            var teamName = teamNode.Attributes["name"].Value;
+                                            var team = db.EnsureTeamExists(city, teamName);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace WorldGM.Web.v1.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=E:\\Projects\\C#\\WorldGM\\WorldGM.DataConsole\\WorldGM_DataConsole_dev.db");
+            optionsBuilder.UseSqlite(@"Data Source=E:\Projects\C#\WorldGM\WorldGM.DataConsole\WorldGM_DataConsole_dev.db");
         }
     }
 }
