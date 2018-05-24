@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /WorldGM.DataConsole/Migrations
 /WorldGM.DataConsole/Migrations/WorldGM_DataConsole_dev.db
+/WorldGM.DataConsole/WorldGM_DataConsole_dev.db
