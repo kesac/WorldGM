@@ -21,13 +21,27 @@ namespace WorldGM.DataConsole
             return existing;
         }
 
-        public static Region EnsureRegionExists(this AppContext db, World parentWorld, string regionName)
+        public static Continent EnsureContinentExists(this AppContext db, World parentWorld, string continentName)
+        {
+            var existing = db.Continents.FirstOrDefault(x => x.Name == continentName);
+
+            if (existing == null)
+            {
+                db.Continents.Add(new Continent{ Name = continentName, WorldId = parentWorld.Id });
+                db.SaveChanges();
+                existing = db.Continents.FirstOrDefault(x => x.Name == continentName);
+            }
+
+            return existing;
+        }
+
+        public static Region EnsureRegionExists(this AppContext db, Continent parentContinent, string regionName)
         {
             var existing = db.Regions.FirstOrDefault(x => x.Name == regionName);
 
             if (existing == null)
             {
-                db.Regions.Add(new Region { Name = regionName, WorldId = parentWorld.Id });
+                db.Regions.Add(new Region { Name = regionName, ContinentId = parentContinent.Id });
                 db.SaveChanges();
                 existing = db.Regions.FirstOrDefault(x => x.Name == regionName);
             }

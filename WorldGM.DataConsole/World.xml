@@ -1,16 +1,18 @@
 ﻿<world name="Iridea">
-  <region name="Astoria">
-    <city name="Lorensk" population="1100000">
-      <team name="Guardians"/>
-    </city>
-    <city name="Vivri" population="2500000">
-      <team name="Valiant"/>
-    </city>
-    <city name="Lanval" population="2500000">
-      <team name="Archmages"/>
-    </city>
-    <city name="Aeden" population="2500000">
-      <team name="Knights"/>
-    </city>
-  </region>
+  <continent name="Zin">
+    <region name="Astoria">
+      <city name="Lorensk" population="1100000">
+        <team name="Guardians"/>
+      </city>
+      <city name="Vivri" population="2500000">
+        <team name="Valiant"/>
+      </city>
+      <city name="Lanval" population="2500000">
+        <team name="Archmages"/>
+      </city>
+      <city name="Aeden" population="2500000">
+        <team name="Knights"/>
+      </city>
+    </region>
+  </continent>
 </world>

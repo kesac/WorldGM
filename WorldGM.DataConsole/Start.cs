@@ -22,36 +22,47 @@ namespace WorldGM.DataConsole
                     var worldName = worldNode.Attributes["name"].Value;
                     var world = db.EnsureWorldExists(worldName);
 
-                    foreach(XmlNode regionNode in worldNode.ChildNodes)
+                    foreach(XmlNode continentNode in worldNode.ChildNodes)
                     {
-                        if (regionNode.Name == "region")
+                        if(continentNode.Name == "continent")
                         {
-                            var regionName = regionNode.Attributes["name"].Value;
-                            var region = db.EnsureRegionExists(world, regionName);
+                            var continentName = continentNode.Attributes["name"].Value;
+                            var continent = db.EnsureContinentExists(world, continentName);
 
-                            foreach(XmlNode cityNode in regionNode.ChildNodes)
+                            foreach (XmlNode regionNode in continentNode.ChildNodes)
                             {
-                                if(cityNode.Name == "city")
+                                if (regionNode.Name == "region")
                                 {
-                                    var cityName = cityNode.Attributes["name"].Value;
-                                    var city = db.EnsureCityExists(region, cityName);
+                                    var regionName = regionNode.Attributes["name"].Value;
+                                    var region = db.EnsureRegionExists(continent, regionName);
 
-                                    city.Population = int.Parse(cityNode.Attributes["population"].Value);
-                                    db.SaveChanges();
-
-                                    foreach(XmlNode teamNode in cityNode.ChildNodes)
+                                    foreach (XmlNode cityNode in regionNode.ChildNodes)
                                     {
-                                        if(teamNode.Name == "team")
+                                        if (cityNode.Name == "city")
                                         {
-                                            var teamName = teamNode.Attributes["name"].Value;
-                                            var team = db.EnsureTeamExists(city, teamName);
+                                            var cityName = cityNode.Attributes["name"].Value;
+                                            var city = db.EnsureCityExists(region, cityName);
+
+                                            city.Population = int.Parse(cityNode.Attributes["population"].Value);
+                                            db.SaveChanges();
+
+                                            foreach (XmlNode teamNode in cityNode.ChildNodes)
+                                            {
+                                                if (teamNode.Name == "team")
+                                                {
+                                                    var teamName = teamNode.Attributes["name"].Value;
+                                                    var team = db.EnsureTeamExists(city, teamName);
+                                                }
+                                            }
                                         }
                                     }
+
                                 }
                             }
-
                         }
                     }
+
+                    
 
                 }
             }
