@@ -18,30 +18,13 @@ namespace WorldGM.Web.v1.Controllers
             using(var db = new WebContext())
             {
                 return db.Worlds
-                    .Include(x => x.Regions)
+                    .Include(w => w.Continents)
+                    .ThenInclude(x => x.Regions)
                     .ThenInclude(y => y.Cities)
                     .ThenInclude(z => z.Teams)
                     .ToList();
             }
         }
-        /*
-        [HttpGet("[action]")]
-        public IEnumerable<Region> Regions()
-        {
-            using (var db = new WebContext())
-            {
-                return db.Regions.ToList();
-            }
-        }
 
-        [HttpGet("[action]")]
-        public IEnumerable<City> Cities()
-        {
-            using (var db = new WebContext())
-            {
-                return db.Cities.ToList();
-            }
-        }
-        */
     }
 }
