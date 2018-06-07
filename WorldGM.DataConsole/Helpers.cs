@@ -7,6 +7,38 @@ namespace WorldGM.DataConsole
 {
     public static class Helpers
     {
+        public static Name EnsureNameExists(this AppContext db, Name newName, bool saveChanges = true)
+        {
+            var existing = db.Names.FirstOrDefault(x => x.Value == newName.Value 
+                && x.IsGivenName == newName.IsGivenName
+                && x.IsFamilyName == newName.IsFamilyName
+                && x.IsMasculine == newName.IsMasculine
+                && x.IsFeminine == newName.IsFeminine
+                && x.IsUnisex == newName.IsUnisex
+                && x.IsRegional == newName.IsRegional
+                && x.RegionId == newName.RegionId
+                && x.IsUniqueToCity == newName.IsUniqueToCity
+                && x.CityId == newName.CityId);
+
+            if (existing == null)
+            {
+                db.Names.Add(newName);
+
+                if (saveChanges)
+                {
+                    db.SaveChanges();
+                }
+
+                return newName;
+            }
+            else
+            {
+                return existing;
+            }
+
+            
+        }
+
         public static World EnsureWorldExists(this AppContext db, string worldName)
         {
             var existing = db.Worlds.FirstOrDefault(x => x.Name == worldName);
