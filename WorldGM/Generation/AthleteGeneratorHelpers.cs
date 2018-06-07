@@ -9,7 +9,7 @@ namespace WorldGM.Generation
         // Lower and upper limits are both inclusive
         public static int Between(this Random r, int lower, int upper)
         {
-            return r.Next(upper) + lower + 1;
+            return r.Next(upper - lower) + lower + 1;
         }
 
     }

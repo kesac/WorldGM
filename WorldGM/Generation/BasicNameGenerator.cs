@@ -32,17 +32,17 @@ namespace WorldGM.Generation
 
         public string NextFeminineName()
         {
-            return this.FeminineNames.Skip(this.Random.Next(this.FamilyNames.Count())).FirstOrDefault().Value;
+            return this.FeminineNames.Skip(this.Random.Next(this.FeminineNames.Count())).FirstOrDefault().Value;
         }
 
         public string NextMasculineName()
         {
-            return this.MasculineNames.Skip(this.Random.Next(this.FamilyNames.Count())).FirstOrDefault().Value;
+            return this.MasculineNames.Skip(this.Random.Next(this.MasculineNames.Count())).FirstOrDefault().Value;
         }
 
         public string NextUnisexName()
         {
-            return this.UnisexNames.Skip(this.Random.Next(this.FamilyNames.Count())).FirstOrDefault().Value;
+            return this.UnisexNames.Skip(this.Random.Next(this.UnisexNames.Count())).FirstOrDefault().Value;
         }
     }
 }
