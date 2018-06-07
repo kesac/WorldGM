@@ -10,5 +10,7 @@ namespace WorldGM
     {
         public int Id { get; set; }
         public int AthleteId { get; set; }
+
+        public int Potential { get; set; }
     }
 }
