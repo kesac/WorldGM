@@ -12,6 +12,7 @@ namespace WorldGM.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamContract> TeamContracts { get; set; }
         public DbSet<Athlete> Athletes { get; set; }
+        public DbSet<Name> Names { get; set; }
     }
 
 }
