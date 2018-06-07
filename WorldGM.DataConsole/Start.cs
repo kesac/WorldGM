@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using WorldGM.Generation;
 
 namespace WorldGM.DataConsole
 {
@@ -13,8 +14,9 @@ namespace WorldGM.DataConsole
         {
             InitializeWorld();
             InitializeNames();
+            InitializeAthletes();
             Console.WriteLine("Initialization complete!");
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void InitializeWorld()
@@ -84,7 +86,7 @@ namespace WorldGM.DataConsole
 
         private static void InitializeNames()
         {
-            bool saveRecordsInBulk = true;
+            bool saveIndividually = false;
             using (var db = new AppContext())
             {
                 string[] familyNames = File.ReadAllLines("Data/AstoriaFamilyNames.txt");
@@ -95,7 +97,7 @@ namespace WorldGM.DataConsole
                     {
                         Value = name,
                         IsFamilyName = true
-                    }, !saveRecordsInBulk);
+                    }, saveIndividually);
                 }
                 
                 Console.WriteLine("Added " + familyNames.Length + " family names");
@@ -109,7 +111,7 @@ namespace WorldGM.DataConsole
                         Value = name,
                         IsGivenName = true,
                         IsFeminine = true
-                    }, !saveRecordsInBulk);
+                    }, saveIndividually);
                 }
                 
                 Console.WriteLine("Added " + feminineNames.Length + " feminine names");
@@ -124,18 +126,43 @@ namespace WorldGM.DataConsole
                         Value = name,
                         IsGivenName = true,
                         IsMasculine = true
-                    }, !saveRecordsInBulk);
+                    }, saveIndividually);
                 }
 
                 Console.WriteLine("Added " + masculineNames.Length + " masculine names");
 
-                if (saveRecordsInBulk)
+
+                db.EnsureNameExists(new Name()
                 {
-                    db.SaveChanges();
-                }
+                    Value = "Jalin",
+                    IsGivenName = true,
+                    IsUnisex = true
+                }, saveIndividually);
+                
+                Console.WriteLine("Added 1 unisex name for debugging purposes");
+
+                db.SaveChanges();
+                
 
             }
         }
         
+        private static void InitializeAthletes()
+        {
+            using(var db = new AppContext())
+            {
+                var nameGenerator = new BasicNameGenerator(db.Names);
+                var playerGenerator = new BasicAthleteGenerator(nameGenerator);
+
+                for (int i = 0; i < 50; i++)
+                {
+                    db.Athletes.Add(playerGenerator.NextAthlete());
+                }
+                Console.WriteLine("Added 50 new athletes");
+
+                db.SaveChanges();
+                
+            }
+        }
     }
 }
