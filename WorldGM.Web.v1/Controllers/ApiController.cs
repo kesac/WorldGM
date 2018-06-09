@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WorldGM.Web.v1.Model;
+using WorldGM.Web.v1.Models;
 using Microsoft.EntityFrameworkCore;
+using WorldGM.Web.v1.ViewModels;
 
 namespace WorldGM.Web.v1.Controllers
 {
@@ -23,6 +24,15 @@ namespace WorldGM.Web.v1.Controllers
                     .ThenInclude(y => y.Cities)
                     .ThenInclude(z => z.Teams)
                     .ToList();
+            }
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<AthleteViewModel> Athletes()
+        {
+            using (var db = new WebContext())
+            {
+                return db.Athletes.Select(x => new AthleteViewModel(x)).ToList();
             }
         }
 

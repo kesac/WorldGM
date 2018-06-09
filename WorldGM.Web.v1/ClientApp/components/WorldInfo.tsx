@@ -11,10 +11,15 @@ class Region {
     cities: City[];
 }
 
+class Continent {
+    name: string;
+    regions: Region[];
+}
+
 class World {
     name: string;
     currentYear: number;
-    regions: Region[];
+    continents: Continent[];
 }
 
 interface WorldInfoState {
@@ -57,15 +62,18 @@ export class WorldInfo extends React.Component<RouteComponentProps<{}>, WorldInf
                         </tr>
                     </thead>
                     <tbody>
-                    {
-                        world.regions.map(region => 
-                            region.cities.map(city => 
-                                <tr>
-                                    <td>{city.name}</td>
-                                    <td>{region.name}</td>
-                                </tr>
+                        {
+                            world.continents.map(continent =>
+                                continent.regions.map(region =>
+                                    region.cities.map(city =>
+                                        <tr>
+                                            <td>{city.name}</td>
+                                            <td>{region.name}</td>
+                                        </tr>
+                                    )
+                                )
                             )
-                        )
+                        
                     }
                     </tbody>
                 </table>
