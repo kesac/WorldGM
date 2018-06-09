@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WorldGM.Data;
 
-namespace WorldGM.Web.v1.Model
+namespace WorldGM.Web.v1.Models
 {
     public class WebContext : WorldGmDataContext
     {
