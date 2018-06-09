@@ -22,9 +22,9 @@ namespace WorldGM.Generation
             var athlete = new Athlete()
             {
                 FamilyName = this.NameGenerator.NextFamilyName(),
-                Age = this.Random.NormalizedBetween(18, 40, 26, 5),
-                Weight = this.Random.NormalizedBetween(120, 230, 180, 20), // Needs normalized distribution later
-                Height = this.Random.NormalizedBetween(155, 210, 174, 10)  // Needs normalized distribution later
+                Age = this.Random.NormalizedBetween(18, 40),
+                Weight = this.Random.NormalizedBetween(120, 230), // Needs normalized distribution later
+                Height = this.Random.NormalizedBetween(155, 210)  // Needs normalized distribution later
             };
 
             var p = new WeightedCollection<AthletePosition>();

@@ -12,15 +12,28 @@ namespace WorldGM.Generation
             return r.Next(1 + upperInclusive - lowerInclusive) + lowerInclusive;
         }
 
-        public static int NormalizedBetween(this Random r, int lower, int upper, int mean, int deviation)
+        public static int NormalizedBetween(this Random r, int lower, int upper)
         {
             // https://stackoverflow.com/questions/218060/random-gaussian-variables
-            double u1 = 1.0 - r.NextDouble(); //uniform(0,1] random doubles
+            double u1 = 1.0 - r.NextDouble();
             double u2 = 1.0 - r.NextDouble();
-            double randStdNormal = System.Math.Sqrt(-2.0 * System.Math.Log(u1)) * System.Math.Sin(2.0 * System.Math.PI * u2); //random normal(0,1)
-            double randNormal = mean + deviation * randStdNormal; //random normal(mean,stdDev^2)
+            double randStdNormal = System.Math.Sqrt(-2.0 * System.Math.Log(u1)) * System.Math.Sin(2.0 * System.Math.PI * u2);
 
-            return Convert.ToInt32((randNormal * (upper - lower)) + lower);
+            // https://stackoverflow.com/questions/1303368/how-to-generate-normally-distributed-random-from-an-integer-range
+            double randNormal = 0.5 + 0.155 * randStdNormal;
+
+            int value = Convert.ToInt32((randNormal * (upper - lower)) + lower);
+
+            if(value < lower)
+            {
+                value = lower;
+            }
+            else if(value > upper)
+            {
+                value = upper;
+            }
+
+            return value;
         }
 
         public static bool OnChance(this Random r, double chance)
