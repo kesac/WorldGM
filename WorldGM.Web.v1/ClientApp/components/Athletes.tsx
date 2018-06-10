@@ -3,19 +3,20 @@ import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
 
 class AthleteViewModel {
+    id: number;
     name: string;
     position: string;
     age: number;
     overallRating: number;
 }
 
-interface AthleteState {
+interface AthletesState {
     athletes: AthleteViewModel[];
     loading: boolean;
 }
 
 
-export class Athletes extends React.Component<RouteComponentProps<{}>, AthleteState> {
+export class Athletes extends React.Component<RouteComponentProps<{}>, AthletesState> {
     constructor() {
         super();
 
@@ -51,7 +52,7 @@ export class Athletes extends React.Component<RouteComponentProps<{}>, AthleteSt
                         athletes.map(x => 
                                 <tr>
                                     <td>{x.position}</td>
-                                    <td><a href="#">{x.name}</a></td>
+                                    <td><a href={'/api/athlete/' + x.id}>{x.name}</a></td>
                                     <td>{x.age}</td>
                                     <td>{x.overallRating}</td>
                                 </tr>

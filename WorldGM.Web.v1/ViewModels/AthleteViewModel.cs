@@ -7,6 +7,7 @@ namespace WorldGM.Web.v1.ViewModels
 {
     public class AthleteViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public int Age { get; set; }
@@ -14,6 +15,7 @@ namespace WorldGM.Web.v1.ViewModels
 
         public AthleteViewModel(Athlete athlete)
         {
+            this.Id = athlete.Id;
             this.Name = athlete.FirstName + " " + athlete.FamilyName;
             this.Age = athlete.Age;
             this.OverallRating = 50;

@@ -36,5 +36,22 @@ namespace WorldGM.Web.v1.Controllers
             }
         }
 
+        [HttpGet("[action]/{id}")]
+        public AthleteViewModel Athlete(int id)
+        {
+            using (var db = new WebContext())
+            {
+                var result = db.Athletes.FirstOrDefault(x => x.Id == id);
+                if(result != null)
+                {
+                    return new AthleteViewModel(result);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
     }
 }

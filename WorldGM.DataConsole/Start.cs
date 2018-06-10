@@ -154,7 +154,7 @@ namespace WorldGM.DataConsole
                 var nameGenerator = new BasicNameGenerator(db.Names);
                 var playerGenerator = new BasicAthleteGenerator(nameGenerator);
 
-                for (int i = 0; i < 50; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     db.Athletes.Add(playerGenerator.NextAthlete());
                 }
