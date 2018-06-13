@@ -52,7 +52,7 @@ export class Athletes extends React.Component<RouteComponentProps<{}>, AthletesS
                         athletes.map(x => 
                                 <tr>
                                     <td>{x.position}</td>
-                                    <td><a href={'/api/athlete/' + x.id}>{x.name}</a></td>
+                                    <td><a href={'/athlete/' + x.id}>{x.name}</a></td>
                                     <td>{x.age}</td>
                                     <td>{x.overallRating}</td>
                                 </tr>

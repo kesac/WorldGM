@@ -37,18 +37,19 @@ namespace WorldGM.Web.v1.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public AthleteViewModel Athlete(int id)
+        public IEnumerable<AthleteViewModel> Athlete(int id)
         {
             using (var db = new WebContext())
             {
-                var result = db.Athletes.FirstOrDefault(x => x.Id == id);
-                if(result != null)
+                var result = db.Athletes.Where(x => x.Id == id);
+
+                if (result.Count() > 0)
                 {
-                    return new AthleteViewModel(result);
+                    return result.Select(x => new AthleteViewModel(x)).ToList();
                 }
                 else
                 {
-                    return null;
+                    return new AthleteViewModel[0];
                 }
             }
         }

@@ -5,7 +5,8 @@ import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import { WorldInfo } from './components/WorldInfo';
-import { Athletes} from './components/Athletes';
+import { Athletes } from './components/Athletes';
+import { Athlete } from './components/Athlete';
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
@@ -13,4 +14,5 @@ export const routes = <Layout>
     <Route path='/fetchdata' component={ FetchData } />
     <Route path='/worldinfo' component={ WorldInfo } />
     <Route path='/athletes' component={ Athletes } />
+    <Route path='/athlete/:id' component={ Athlete } />
 </Layout>;
