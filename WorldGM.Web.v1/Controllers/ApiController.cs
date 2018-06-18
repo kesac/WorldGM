@@ -41,7 +41,10 @@ namespace WorldGM.Web.v1.Controllers
         {
             using (var db = new WebContext())
             {
-                var result = db.Athletes.Where(x => x.Id == id);
+                var result = db.Athletes
+                    .Include(x => x.TeamContract)
+                    .ThenInclude(y => y.Team)
+                    .Where(x => x.Id == id);
 
                 if (result.Count() > 0)
                 {
@@ -55,16 +58,37 @@ namespace WorldGM.Web.v1.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<TeamViewModel> Teams()
+        public IEnumerable<TeamListItemViewModel> Teams()
         {
             using(var db = new WebContext())
             {
                 return db.Teams
                     .Include(t => t.City)
-                    .Select(x => new TeamViewModel(x))
+                    .Select(x => new TeamListItemViewModel(x))
                     .ToList();
             }
         }
 
+        [HttpGet("[action]/{id}")]
+        public IEnumerable<TeamViewModel> Team(int id)
+        {
+            using (var db = new WebContext())
+            {
+                var result = db.Teams
+                    .Include(t => t.City)
+                    .Include(t => t.TeamContracts)
+                    .ThenInclude(x => x.Athlete)
+                    .Where(x => x.Id == id);
+
+                if (result.Count() > 0)
+                {
+                    return result.Select(x => new TeamViewModel(x)).ToList();
+                }
+                else
+                {
+                    return new TeamViewModel[0];
+                }
+            }
+        }
     }
 }
