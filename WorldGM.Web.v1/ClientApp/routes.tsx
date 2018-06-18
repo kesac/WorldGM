@@ -7,6 +7,7 @@ import { Counter } from './components/Counter';
 import { WorldInfo } from './components/WorldInfo';
 import { Athletes } from './components/Athletes';
 import { Athlete } from './components/Athlete';
+import { TeamList } from './components/TeamList'
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
@@ -15,4 +16,5 @@ export const routes = <Layout>
     <Route path='/worldinfo' component={ WorldInfo } />
     <Route path='/athletes' component={ Athletes } />
     <Route path='/athlete/:id' component={ Athlete } />
+    <Route path='/teams' component={ TeamList } />
 </Layout>;

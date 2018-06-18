@@ -54,5 +54,17 @@ namespace WorldGM.Web.v1.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        public IEnumerable<TeamViewModel> Teams()
+        {
+            using(var db = new WebContext())
+            {
+                return db.Teams
+                    .Include(t => t.City)
+                    .Select(x => new TeamViewModel(x))
+                    .ToList();
+            }
+        }
+
     }
 }
