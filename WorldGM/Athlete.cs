@@ -38,6 +38,7 @@ namespace WorldGM
         public int Reflection { get; set; }  // Ability to self-improve (a little) without dedicated training
         public int Learning { get; set; }    // Ability to improve with dedicated training
         public int Dedication { get; set; }  // Ability to withstand prolonged dedicated training
+        public int Leadership { get; set; }  // Probability player is captain
 
         public int Strength { get; set; }    // Ability to withstand injury
         public int Injury { get; set; }      // Days left until recovery
