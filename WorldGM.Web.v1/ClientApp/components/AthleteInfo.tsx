@@ -11,17 +11,17 @@ class AthleteViewModel {
 }
 
 
-interface AthleteProps extends RouteComponentProps<any>{
+interface AthleteInfoProps extends RouteComponentProps<any>{
     id: number;
 }
 
-interface AthleteState {
+interface AthleteInfoState {
     athletes: AthleteViewModel[];
     loading: boolean;
 }
 
 
-export class Athlete extends React.Component<AthleteProps, AthleteState> {
+export class AthleteInfo extends React.Component<AthleteInfoProps, AthleteInfoState> {
     constructor() {
         super();
         this.state = { athletes: [], loading: true };
@@ -40,7 +40,6 @@ export class Athlete extends React.Component<AthleteProps, AthleteState> {
     }
 
     public render() {
-
 
         let athlete = this.state.athletes[0];
         let contents = this.state.loading

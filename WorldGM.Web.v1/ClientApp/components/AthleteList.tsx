@@ -10,13 +10,13 @@ class AthleteViewModel {
     overallRating: number;
 }
 
-interface AthletesState {
+interface AthleteListState {
     athletes: AthleteViewModel[];
     loading: boolean;
 }
 
 
-export class Athletes extends React.Component<RouteComponentProps<{}>, AthletesState> {
+export class AthleteList extends React.Component<RouteComponentProps<{}>, AthleteListState> {
     constructor() {
         super();
 
