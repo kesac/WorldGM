@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,9 @@ namespace WorldGM
     public class Athlete
     {
         public int Id { get; set; }
+
+        [IgnoreDataMember]
+        public virtual TeamContract TeamContract { get; set; }
 
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
