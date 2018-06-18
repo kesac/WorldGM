@@ -2,14 +2,14 @@
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
 
-class TeamViewModel {
+class TeamListItemViewModel {
     id: number;
     name: string;
     city: string;
 }
 
 interface TeamListState {
-    teams: TeamViewModel[];
+    teams: TeamListItemViewModel[];
     loading: boolean;
 }
 

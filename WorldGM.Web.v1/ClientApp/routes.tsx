@@ -5,7 +5,8 @@ import { Home } from './components/Home';
 import { WorldInfo } from './components/WorldInfo';
 import { AthleteList } from './components/AthleteList';
 import { AthleteInfo } from './components/AthleteInfo';
-import { TeamList } from './components/TeamList'
+import { TeamList } from './components/TeamList';
+import { TeamInfo } from './components/TeamInfo';
 
 export const routes = <Layout>
     <Route exact path='/' component={ Home } />
@@ -13,4 +14,5 @@ export const routes = <Layout>
     <Route path='/athletes' component={ AthleteList } />
     <Route path='/athlete/:id' component={ AthleteInfo } />
     <Route path='/teams' component={ TeamList } />
+    <Route path='/team/:id' component={ TeamInfo } />
 </Layout>;
