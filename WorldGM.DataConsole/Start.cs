@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using WorldGM.Generation;
@@ -15,6 +16,7 @@ namespace WorldGM.DataConsole
             InitializeWorld();
             InitializeNames();
             InitializeAthletes();
+            InitializeTeams();
             Console.WriteLine("Initialization complete!");
             Console.ReadKey();
         }
@@ -151,18 +153,74 @@ namespace WorldGM.DataConsole
         {
             using(var db = new AppContext())
             {
-                var nameGenerator = new BasicNameGenerator(db.Names);
-                var playerGenerator = new BasicAthleteGenerator(nameGenerator);
-
-                for (int i = 0; i < 100; i++)
+                int limit = 200;
+                if (db.Athletes.Count() < limit)
                 {
-                    db.Athletes.Add(playerGenerator.NextAthlete());
-                }
-                Console.WriteLine("Added 50 new athletes");
+                    var nameGenerator = new BasicNameGenerator(db.Names);
+                    var playerGenerator = new BasicAthleteGenerator(nameGenerator);
 
-                db.SaveChanges();
+                    for (int i = 0; i < 100; i++)
+                    {
+                        db.Athletes.Add(playerGenerator.NextAthlete());
+                    }
+                    Console.WriteLine("Added 50 new athletes");
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("There are already " + limit + " or more existing athletes");
+                }
                 
             }
         }
+
+        private static void InitializeTeams()
+        {
+            using (var db = new AppContext())
+            {
+                bool saveChangesIncrementally = false; // if false, changes are saved in bulk
+
+                foreach(var team in db.Teams)
+                {
+                    var contracts = db.TeamContracts.Where(x => x.TeamId == team.Id);
+
+                    if(contracts.Count() == 0)
+                    {
+                        // 2 goalies
+                        // 4 forwards
+                        // 3 midfielders
+                        // 3 defense
+                        var goalies = db.Athletes.Where(x => x.Position == AthletePosition.Goalkeeper && !x.PlayerHasContract(db));
+                        var forwards = db.Athletes.Where(x => x.Position == AthletePosition.Forward && !x.PlayerHasContract(db));
+                        var midfielders = db.Athletes.Where(x => x.Position == AthletePosition.Midfield && !x.PlayerHasContract(db));
+                        var defense = db.Athletes.Where(x => x.Position == AthletePosition.Defense && !x.PlayerHasContract(db));
+
+                        for(int i = 0; i < 2; i++)
+                        {
+                            db.Contract(team, goalies.GetRandomPlayer(), saveChangesIncrementally);
+                        }
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            db.Contract(team, forwards.GetRandomPlayer(), saveChangesIncrementally);
+                        }
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            db.Contract(team, midfielders.GetRandomPlayer(), saveChangesIncrementally);
+                        }
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            db.Contract(team, defense.GetRandomPlayer(), saveChangesIncrementally);
+                        }
+
+                        db.SaveChanges();
+                    }
+                }
+            }
+        }
+
     }
 }

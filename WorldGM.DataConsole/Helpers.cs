@@ -7,6 +7,34 @@ namespace WorldGM.DataConsole
 {
     public static class Helpers
     {
+
+        public static void Contract(this AppContext db, Team team, Athlete athlete, bool saveChanges = true)
+        {
+            db.TeamContracts.Add(new TeamContract()
+            {
+                 TeamId = team.Id,
+                 AthleteId = athlete.Id,
+                 FirstYear = 218,
+                 LastYear = 221,
+                 AnnualPay = 100
+            });
+
+            if (saveChanges)
+            {
+                db.SaveChanges();
+            }
+        }
+
+        public static Athlete GetRandomPlayer(this IQueryable<Athlete> athletes)
+        {
+            return athletes.Skip(new Random().Next(athletes.Count())).FirstOrDefault();
+        }
+
+        public static bool PlayerHasContract(this Athlete athlete, AppContext db)
+        {
+            return db.TeamContracts.Where(x => x.AthleteId == athlete.Id).Count() > 0;
+        }
+
         public static Name EnsureNameExists(this AppContext db, Name newName, bool saveChanges = true)
         {
             var existing = db.Names.FirstOrDefault(x => x.Value == newName.Value 
