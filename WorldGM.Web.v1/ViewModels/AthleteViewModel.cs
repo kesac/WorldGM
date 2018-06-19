@@ -13,9 +13,9 @@ namespace WorldGM.Web.v1.ViewModels
         public int Age { get; set; }
         public int OverallRating { get; set; }
 
-        public int ContractFirstYear { get; set; }
-        public int ContractLastYear { get; set; }
-        public int AnnualPay { get; set; }
+        public int? ContractFirstYear { get; set; }
+        public int? ContractLastYear { get; set; }
+        public int? AnnualPay { get; set; }
 
 
         public AthleteViewModel(Athlete athlete)

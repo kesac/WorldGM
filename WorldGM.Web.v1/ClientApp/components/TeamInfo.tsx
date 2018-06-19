@@ -8,6 +8,10 @@ class AthleteViewModel {
     position: string;
     age: number;
     overallRating: number;
+
+    contractFirstYear: number;
+    contractLastYear: number;
+    annualPay: number;
 }
 
 class TeamViewModel {
@@ -65,6 +69,9 @@ export class TeamInfo extends React.Component<TeamInfoProps, TeamInfoState> {
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Overall</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Pay</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,6 +82,9 @@ export class TeamInfo extends React.Component<TeamInfoProps, TeamInfoState> {
                                         <td><a href={'/athlete/' + x.id}>{x.name}</a></td>
                                         <td>{x.age}</td>
                                         <td>{x.overallRating}</td>
+                                        <td>{x.contractFirstYear}</td>
+                                        <td>{x.contractLastYear}</td>
+                                        <td>{x.annualPay}</td>
                                     </tr>
                                 )
                             }
