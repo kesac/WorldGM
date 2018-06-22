@@ -7,11 +7,23 @@
       <city name="Vivri" population="2500000">
         <team name="Valiant"/>
       </city>
-      <city name="Lanval" population="2500000">
+      <city name="Lanval" population="1800000">
         <team name="Archmages"/>
       </city>
-      <city name="Aeden" population="2500000">
+      <city name="Aeden" population="2400000">
         <team name="Knights"/>
+      </city>
+      <city name="Solesta" population="800000">
+        <team name="Sabres"/>
+      </city>
+      <city name="Espern" population="1500000">
+        <team name="Spirits"/>
+      </city>
+      <city name="Kodekai" population="1500000">
+        <team name="Comets"/>
+      </city>
+      <city name="Galaive" population="1600000">
+        <team name="Halberds"/>
       </city>
     </region>
   </continent>

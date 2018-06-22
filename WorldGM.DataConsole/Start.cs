@@ -153,17 +153,17 @@ namespace WorldGM.DataConsole
         {
             using(var db = new AppContext())
             {
-                int limit = 200;
+                int limit = 500;
                 if (db.Athletes.Count() < limit)
                 {
                     var nameGenerator = new BasicNameGenerator(db.Names);
                     var playerGenerator = new BasicAthleteGenerator(nameGenerator);
 
-                    for (int i = 0; i < 100; i++)
+                    for (int i = 0; i < 500; i++)
                     {
                         db.Athletes.Add(playerGenerator.NextAthlete());
                     }
-                    Console.WriteLine("Added 50 new athletes");
+                    Console.WriteLine("Added 500 new athletes");
 
                     db.SaveChanges();
                 }
