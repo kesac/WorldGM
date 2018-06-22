@@ -44,6 +44,7 @@ namespace WorldGM.Web.v1.Controllers
                 var result = db.Athletes
                     .Include(x => x.TeamContract)
                     .ThenInclude(y => y.Team)
+                    .ThenInclude(z => z.City)
                     .Where(x => x.Id == id);
 
                 if (result.Count() > 0)

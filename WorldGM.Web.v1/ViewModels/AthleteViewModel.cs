@@ -13,10 +13,13 @@ namespace WorldGM.Web.v1.ViewModels
         public int Age { get; set; }
         public int OverallRating { get; set; }
 
+        public bool HasContract { get; set; }
+        public int? TeamId { get; set; }
+        public string TeamName { get; set; }
         public int? ContractFirstYear { get; set; }
         public int? ContractLastYear { get; set; }
         public int? AnnualPay { get; set; }
-
+        
 
         public AthleteViewModel(Athlete athlete)
         {
@@ -27,9 +30,16 @@ namespace WorldGM.Web.v1.ViewModels
 
             if(athlete.TeamContract != null)
             {
+                this.HasContract = true;
                 this.ContractFirstYear = athlete.TeamContract.FirstYear;
                 this.ContractLastYear = athlete.TeamContract.LastYear;
                 this.AnnualPay = athlete.TeamContract.AnnualPay;
+                this.TeamId = athlete.TeamContract.Team.Id;
+                this.TeamName = athlete.TeamContract.Team.City.Name + " " + athlete.TeamContract.Team.Name;
+            }
+            else
+            {
+                this.TeamName = "Free Agent";
             }
 
             if(athlete.Position == AthletePosition.Forward)

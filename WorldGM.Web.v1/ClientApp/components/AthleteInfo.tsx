@@ -2,14 +2,19 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
 
-class AthleteViewModel {
+interface AthleteViewModel {
     id: number;
     name: string;
     position: string;
     age: number;
     overallRating: number;
+    hasContract: boolean;
+    teamId: number;
+    teamName: string;
+    contractFirstYear: number;
+    contractLastYear: number;
+    annualPay: number;
 }
-
 
 interface AthleteInfoProps extends RouteComponentProps<any>{
     id: number;
@@ -42,11 +47,24 @@ export class AthleteInfo extends React.Component<AthleteInfoProps, AthleteInfoSt
     public render() {
 
         let athlete = this.state.athletes[0];
+
+        let teamName = "Free Agent";
+        let teamId= 0;
+
+        if(athlete != null)
+        {
+
+            teamName = athlete.teamName;
+            teamId = athlete.teamId;
+            
+        }
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             : <div>
                 <h1>{athlete.name} <span className="text-muted"> | {athlete.position}</span></h1>
-                
+
+                <a href={'team/' + teamId}>{teamName}</a>
+
                 <table className="table">
                     <thead>
                         <tr>

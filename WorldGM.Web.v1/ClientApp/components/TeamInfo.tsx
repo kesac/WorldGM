@@ -2,25 +2,25 @@
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
 
-class AthleteViewModel {
+interface AthleteViewModel {
     id: number;
     name: string;
     position: string;
     age: number;
     overallRating: number;
-
+    hasContract: boolean;
+    teamId: number;
+    teamName: string;
     contractFirstYear: number;
     contractLastYear: number;
     annualPay: number;
 }
 
-class TeamViewModel {
-
+interface TeamViewModel {
     id: number;
     city: string;
     name: string;
     athletes: AthleteViewModel[];
-    
 }
 
 interface TeamInfoState {
