@@ -17,6 +17,8 @@ namespace WorldGM.DataConsole
             InitializeNames();
             InitializeAthletes();
             InitializeTeams();
+            InitializeSchedule();
+
             Console.WriteLine("Initialization complete!");
             Console.ReadKey();
         }
@@ -219,8 +221,26 @@ namespace WorldGM.DataConsole
                         db.SaveChanges();
                     }
                 }
+                Console.WriteLine("Ensured all teams have contracted players");
             }
         }
 
+        private static void InitializeSchedule()
+        {
+            using(var db = new AppContext())
+            {
+                var scheduler = new BasicScheduleGenerator();
+                var schedule = scheduler.GetSchedule(db.Teams.ToList());
+
+                Console.WriteLine("Clearing existing games");
+                db.ScheduledMatches.RemoveRange(db.ScheduledMatches.ToList());
+                db.Schedules.RemoveRange(db.Schedules.ToList());
+
+                Console.WriteLine("Scheduling games...");
+                db.Schedules.Add(schedule);
+                db.SaveChanges();
+                Console.WriteLine("Games scheduled!");
+            }
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace WorldGM.Data
 {
@@ -13,6 +12,8 @@ namespace WorldGM.Data
         public DbSet<TeamContract> TeamContracts { get; set; }
         public DbSet<Athlete> Athletes { get; set; }
         public DbSet<Name> Names { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<ScheduledMatch> ScheduledMatches { get; set; }
     }
 
 }
