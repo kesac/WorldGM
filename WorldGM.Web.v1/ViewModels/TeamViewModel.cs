@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 
 namespace WorldGM.Web.v1.ViewModels
 {
+    /**
+     * If you only want to get a list of teams, use TeamViewModel instead. This viewmodel will return
+     * teams, cities, team contracts, and athletes!
+     */
     public class TeamViewModel
     {
         public int Id { get; set; }
         public string City { get; set; }
         public string Name { get; set; }
-
         public List<AthleteViewModel> Athletes { get; set; }
-        /**
-         * Expects City, TeamContracts, and TeamContracts.select(x => x.Athlete) to be included
-         */
+        
         public TeamViewModel(Team team)
         {
             this.Id = team.Id;
@@ -22,10 +23,15 @@ namespace WorldGM.Web.v1.ViewModels
             this.Name = team.Name;
 
             this.Athletes = new List<AthleteViewModel>();
-            foreach(var contract in team.TeamContracts)
+
+            if(team.TeamContracts != null)
             {
-                this.Athletes.Add(new AthleteViewModel(contract.Athlete));
+                foreach (var contract in team.TeamContracts)
+                {
+                    this.Athletes.Add(new AthleteViewModel(contract.Athlete));
+                }
             }
+
         }
     }
 }

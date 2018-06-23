@@ -59,13 +59,13 @@ namespace WorldGM.Web.v1.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<TeamListItemViewModel> Teams()
+        public IEnumerable<TeamViewModel> Teams()
         {
             using(var db = new WebContext())
             {
                 return db.Teams
                     .Include(t => t.City)
-                    .Select(x => new TeamListItemViewModel(x))
+                    .Select(x => new TeamViewModel(x))
                     .ToList();
             }
         }
