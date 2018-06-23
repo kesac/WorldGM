@@ -12,7 +12,7 @@ export class AthleteInfo extends DefaultComponent<AthleteViewModel> {
     public componentDidMount() {
         console.log(this.props.match.params.id);
         var athleteId = this.props.match.params.id;
-        fetch('api/Athlete/' + athleteId)
+        fetch('api/athlete/' + athleteId)
             .then(response => {
                 return response.json();
             })
