@@ -1,42 +1,12 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
+import { DefaultComponent, TeamViewModel } from '../WorldGM';
 
-interface AthleteViewModel {
-    id: number;
-    name: string;
-    position: string;
-    age: number;
-    overallRating: number;
-    hasContract: boolean;
-    teamId: number;
-    teamName: string;
-    contractFirstYear: number;
-    contractLastYear: number;
-    annualPay: number;
-}
-
-interface TeamViewModel {
-    id: number;
-    city: string;
-    name: string;
-    athletes: AthleteViewModel[];
-}
-
-interface TeamInfoState {
-    teams: TeamViewModel[];
-    loading: boolean;
-}
-
-interface TeamInfoProps extends RouteComponentProps<any> {
-    id: number;
-}
-
-export class TeamInfo extends React.Component<TeamInfoProps, TeamInfoState> {
+export class TeamInfo extends DefaultComponent<TeamViewModel> {
 
     constructor() {
         super();
-        this.state = { teams: [], loading: true };
     }
 
     public componentDidMount() {
@@ -46,7 +16,7 @@ export class TeamInfo extends React.Component<TeamInfoProps, TeamInfoState> {
                 return response.json();
             })
             .then(data => {
-                this.setState({ teams: data, loading: false });
+                this.setState({ values: data, loading: false });
             });
     }
 
@@ -57,7 +27,7 @@ export class TeamInfo extends React.Component<TeamInfoProps, TeamInfoState> {
         }
         else {
 
-            let team = this.state.teams[0];
+            let team = this.state.values[0];
             let athletes = team.athletes;
             let contents = <div>
                     <h1>{team.city} {team.name}</h1>

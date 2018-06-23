@@ -1,37 +1,24 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
+import { DefaultComponent, TeamViewModel } from '../WorldGM';
 
-class TeamListItemViewModel {
-    id: number;
-    name: string;
-    city: string;
-}
+export class TeamList extends DefaultComponent<TeamViewModel> {
 
-interface TeamListState {
-    teams: TeamListItemViewModel[];
-    loading: boolean;
-}
-
-export class TeamList extends React.Component<RouteComponentProps<{}>, TeamListState> {
     constructor() {
         super();
-
-        this.state = {
-            teams: [], loading: true
-        }
-
+        
         fetch('api/teams')
             .then(response => {
                 return response.json();
             })
             .then(data => {
-                this.setState({ teams: data, loading: false });
+                this.setState({ values: data, loading: false });
             });
     }
 
     public render() {
-        let teams = this.state.teams;
+        let teams = this.state.values;
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             : <div>

@@ -1,40 +1,24 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
+import { DefaultComponent, AthleteViewModel } from '../WorldGM';
 
-class AthleteViewModel {
-    id: number;
-    name: string;
-    position: string;
-    age: number;
-    overallRating: number;
-}
+export class AthleteList extends DefaultComponent<AthleteViewModel> {
 
-interface AthleteListState {
-    athletes: AthleteViewModel[];
-    loading: boolean;
-}
-
-
-export class AthleteList extends React.Component<RouteComponentProps<{}>, AthleteListState> {
     constructor() {
         super();
 
-        this.state = { athletes: [], loading: true };
-
         fetch('api/Athletes')
             .then(response => {
-                /*console.log(response);*/
                 return response.json();
             })
             .then(data => {
-                this.setState({ athletes: data as AthleteViewModel[], loading: false });
+                this.setState({ values: data as AthleteViewModel[], loading: false });
             });
     }
 
     public render() {
-
-        let athletes = this.state.athletes;
+        let athletes = this.state.values;
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             :  <div>

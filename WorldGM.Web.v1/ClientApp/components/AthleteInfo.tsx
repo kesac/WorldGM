@@ -1,35 +1,12 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import 'isomorphic-fetch';
+import { DefaultComponent, AthleteViewModel } from '../WorldGM';
 
-interface AthleteViewModel {
-    id: number;
-    name: string;
-    position: string;
-    age: number;
-    overallRating: number;
-    hasContract: boolean;
-    teamId: number;
-    teamName: string;
-    contractFirstYear: number;
-    contractLastYear: number;
-    annualPay: number;
-}
+export class AthleteInfo extends DefaultComponent<AthleteViewModel> {
 
-interface AthleteInfoProps extends RouteComponentProps<any>{
-    id: number;
-}
-
-interface AthleteInfoState {
-    athletes: AthleteViewModel[];
-    loading: boolean;
-}
-
-
-export class AthleteInfo extends React.Component<AthleteInfoProps, AthleteInfoState> {
     constructor() {
         super();
-        this.state = { athletes: [], loading: true };
     }
 
     public componentDidMount() {
@@ -40,16 +17,15 @@ export class AthleteInfo extends React.Component<AthleteInfoProps, AthleteInfoSt
                 return response.json();
             })
             .then(data => {
-                this.setState({ athletes: data as AthleteViewModel[], loading: false });
+                this.setState({ values: data as AthleteViewModel[], loading: false });
             });
     }
 
     public render() {
-
-        let athlete = this.state.athletes[0];
+        let athlete = this.state.values[0];
 
         let teamName = "Free Agent";
-        let teamId= 0;
+        let teamId = 0;
 
         if(athlete != null)
         {
