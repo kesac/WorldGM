@@ -7,12 +7,14 @@ import { AthleteList } from './components/AthleteList';
 import { AthleteInfo } from './components/AthleteInfo';
 import { TeamList } from './components/TeamList';
 import { TeamInfo } from './components/TeamInfo';
+import { ScheduledMatches } from './components/ScheduledMatches'
 
 export const routes = <Layout>
-    <Route exact path='/' component={ Home } />
-    <Route path='/worldinfo' component={ WorldInfo } />
-    <Route path='/athletes' component={ AthleteList } />
-    <Route path='/athlete/:id' component={ AthleteInfo } />
-    <Route path='/teams' component={ TeamList } />
-    <Route path='/team/:id' component={ TeamInfo } />
+    <Route exact path='/' component={Home} />
+    <Route path='/worldinfo' component={WorldInfo} />
+    <Route path='/athletes' component={AthleteList} />
+    <Route path='/athlete/:id' component={AthleteInfo} />
+    <Route path='/teams' component={TeamList} />
+    <Route path='/team/:id' component={TeamInfo} />
+    <Route path='/schedule' component={ScheduledMatches} />
 </Layout>;

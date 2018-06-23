@@ -22,6 +22,19 @@ export interface City {
     name: string;
 }
 
+export interface Schedule {
+    scheduledMatches: ScheduledMatch[];
+}
+
+export interface ScheduledMatch {
+    id: number;
+    seasonDay: number;
+    homeTeamId: number;
+    homeTeamName: string;
+    awayTeamId: number;
+    awayTeamName: string;
+}
+
 /* Maps to C# viewmodel classes */
 export interface AthleteViewModel {
     id: number;
