@@ -97,11 +97,19 @@ namespace WorldGM.Web.v1.Controllers
         {
             using(var db = new WebContext())
             {
-                return db.Schedules
+                var result = db.Schedules
                     .Include(x => x.ScheduledMatches).ThenInclude(y => y.HomeTeam)
                     .Include(x => x.ScheduledMatches).ThenInclude(y => y.AwayTeam)
                     .Select(x => new ScheduleViewModel(x))
                     .ToList();
+
+                foreach(var r in result)
+                {
+                    r.ScheduledMatches = r.ScheduledMatches.OrderBy(x => x.SeasonDay).ToList();
+                }
+
+                return result;
+
             }
         }
     }
