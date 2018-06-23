@@ -30,7 +30,7 @@ namespace WorldGM.Web.v1.Controllers
         [HttpGet("[action]")]
         public IEnumerable<AthleteViewModel> Athletes()
         {
-            using (var db = new WebContext())
+            using(var db = new WebContext())
             {
                 return db.Athletes.Select(x => new AthleteViewModel(x)).ToList();
             }
@@ -39,7 +39,7 @@ namespace WorldGM.Web.v1.Controllers
         [HttpGet("[action]/{id}")]
         public IEnumerable<AthleteViewModel> Athlete(int id)
         {
-            using (var db = new WebContext())
+            using(var db = new WebContext())
             {
                 var result = db.Athletes
                     .Include(x => x.TeamContract)
@@ -73,7 +73,7 @@ namespace WorldGM.Web.v1.Controllers
         [HttpGet("[action]/{id}")]
         public IEnumerable<TeamViewModel> Team(int id)
         {
-            using (var db = new WebContext())
+            using(var db = new WebContext())
             {
                 var result = db.Teams
                     .Include(t => t.City)
@@ -89,6 +89,19 @@ namespace WorldGM.Web.v1.Controllers
                 {
                     return new TeamViewModel[0];
                 }
+            }
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<ScheduleViewModel> Schedule()
+        {
+            using(var db = new WebContext())
+            {
+                return db.Schedules
+                    .Include(x => x.ScheduledMatches).ThenInclude(y => y.HomeTeam)
+                    .Include(x => x.ScheduledMatches).ThenInclude(y => y.AwayTeam)
+                    .Select(x => new ScheduleViewModel(x))
+                    .ToList();
             }
         }
     }
