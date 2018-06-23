@@ -2,28 +2,28 @@
   <continent name="Zin">
     <region name="Astoria">
       <city name="Lorensk" population="1100000">
-        <team name="Guardians"/>
+        <team name="Guardians" shortname="LOR"/>
       </city>
       <city name="Vivri" population="2500000">
-        <team name="Valiant"/>
+        <team name="Valiant" shortname="VIV"/>
       </city>
       <city name="Lanval" population="1800000">
-        <team name="Archmages"/>
+        <team name="Archmages" shortname="LAN"/>
       </city>
       <city name="Aeden" population="2400000">
-        <team name="Knights"/>
+        <team name="Knights" shortname="ADN"/>
       </city>
       <city name="Solesta" population="800000">
-        <team name="Sabres"/>
+        <team name="Sabres" shortname="SOL"/>
       </city>
       <city name="Espern" population="1500000">
-        <team name="Spirits"/>
+        <team name="Spirits" shortname="ESP"/>
       </city>
       <city name="Kodekai" population="1500000">
-        <team name="Comets"/>
+        <team name="Comets" shortname="KDC"/>
       </city>
       <city name="Galaive" population="1600000">
-        <team name="Halberds"/>
+        <team name="Halberds" shortname="GAL"/>
       </city>
     </region>
   </continent>
