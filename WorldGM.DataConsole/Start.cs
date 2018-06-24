@@ -182,8 +182,8 @@ namespace WorldGM.DataConsole
             using (var db = new AppContext())
             {
                 bool saveChangesIncrementally = false; // if false, changes are saved in bulk
-
-                foreach(var team in db.Teams)
+                Console.WriteLine("Ensuring all teams have contracted players...");
+                foreach (var team in db.Teams)
                 {
                     var contracts = db.TeamContracts.Where(x => x.TeamId == team.Id);
 
@@ -221,7 +221,7 @@ namespace WorldGM.DataConsole
                         db.SaveChanges();
                     }
                 }
-                Console.WriteLine("Ensured all teams have contracted players");
+                Console.WriteLine("Complete!");
             }
         }
 
@@ -229,17 +229,21 @@ namespace WorldGM.DataConsole
         {
             using(var db = new AppContext())
             {
-                var scheduler = new BasicScheduleGenerator();
-                var schedule = scheduler.GetSchedule(db.Teams.ToList());
+                var scheduler = new BalancedScheduleGenerator() { DebugInfo = true };
 
                 Console.WriteLine("Clearing existing games");
                 db.ScheduledMatches.RemoveRange(db.ScheduledMatches.ToList());
                 db.Schedules.RemoveRange(db.Schedules.ToList());
 
-                Console.WriteLine("Scheduling games...");
+                Console.WriteLine("Scheduling games... (this might take a few seconds)");
+                var schedule = scheduler.GetSchedule(db.Teams.ToList());
+
+                var totalGames = schedule.ScheduledMatches.Count;
+                var totalDays = schedule.ScheduledMatches.Max(x => x.SeasonDay);
+                
                 db.Schedules.Add(schedule);
                 db.SaveChanges();
-                Console.WriteLine("Games scheduled!");
+                Console.WriteLine("Scheduled " + totalGames + " games over " + totalDays + " days!");
             }
         }
     }
