@@ -100,7 +100,7 @@ namespace WorldGM.Generation
             // If the constraints are violated too many times, reduce the number of matches to X-1 and repeat the selection process.
             // If the number of matches cannot be reduced any further, move to the next day Y+1.
 
-            int maximumDays = teams.Count * ((teams.Count - 1) / 2);
+            int maximumDays = teams.Count * (teams.Count - 1);
             int defaultMatchesPerDay = teams.Count / 2;
             int matchesPerDay = defaultMatchesPerDay;
             int totalAttemptsToFillDay = 0;
@@ -123,7 +123,7 @@ namespace WorldGM.Generation
                 //             lowest games played must be minimal (2 games at most)
                 if (group.HasDuplicateTeams()
                     || group.PlayedConsecutiveDays(orderedMatches, currentDay)
-                    || group.ExceedsGamePlayedDifferentialLimit(orderedMatches, teams.Count, 2))
+                    || group.ExceedsGamePlayedDifferentialLimit(orderedMatches, teams.Count, 3))
                 {
                     totalAttemptsToFillDay++;
                 }
@@ -146,7 +146,7 @@ namespace WorldGM.Generation
                 // Attempts to form matches for the day is random
                 // If too many failed attempts are made, we relax the groupSizeLimit
                 // slightly.
-                if (totalAttemptsToFillDay > 100)
+                if (totalAttemptsToFillDay > 25)
                 {
                     matchesPerDay--;
                     totalAttemptsToFillDay = 0;

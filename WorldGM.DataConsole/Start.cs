@@ -10,6 +10,8 @@ namespace WorldGM.DataConsole
 {
     public class Start
     {
+        private static bool TeamCountChanged { get; set; }
+        private static bool ForceScheduleRecreation { get; set; }
 
         public static void Main(string[] args)
         {
@@ -32,6 +34,7 @@ namespace WorldGM.DataConsole
 
             using (var db = new AppContext())
             {
+                int currentTeamCount = db.Teams.Count();
                 if (worldNode.Name == "world")
                 {
                     var worldName = worldNode.Attributes["name"].Value;
@@ -84,6 +87,12 @@ namespace WorldGM.DataConsole
 
 
 
+                }
+                int newTeamCount = db.Teams.Count();
+
+                if(currentTeamCount != newTeamCount)
+                {
+                    TeamCountChanged = true;
                 }
             }
         }
@@ -229,21 +238,29 @@ namespace WorldGM.DataConsole
         {
             using(var db = new AppContext())
             {
-                var scheduler = new BalancedScheduleGenerator() { DebugInfo = true };
+                var scheduler = new BalancedScheduleGenerator() { DebugInfo = false };
 
-                Console.WriteLine("Clearing existing games");
-                db.ScheduledMatches.RemoveRange(db.ScheduledMatches.ToList());
-                db.Schedules.RemoveRange(db.Schedules.ToList());
+                if (db.Schedules.Count() == 0 || TeamCountChanged || ForceScheduleRecreation)
+                {
 
-                Console.WriteLine("Scheduling games... (this might take a few seconds)");
-                var schedule = scheduler.GetSchedule(db.Teams.ToList());
+                    Console.WriteLine("Clearing existing games");
+                    db.ScheduledMatches.RemoveRange(db.ScheduledMatches.ToList());
+                    db.Schedules.RemoveRange(db.Schedules.ToList());
 
-                var totalGames = schedule.ScheduledMatches.Count;
-                var totalDays = schedule.ScheduledMatches.Max(x => x.SeasonDay);
-                
-                db.Schedules.Add(schedule);
-                db.SaveChanges();
-                Console.WriteLine("Scheduled " + totalGames + " games over " + totalDays + " days!");
+                    Console.WriteLine("Scheduling games... (this might take a few seconds)");
+                    var schedule = scheduler.GetSchedule(db.Teams.ToList());
+
+                    var totalGames = schedule.ScheduledMatches.Count;
+                    var totalDays = schedule.ScheduledMatches.Max(x => x.SeasonDay);
+
+                    db.Schedules.Add(schedule);
+                    db.SaveChanges();
+                    Console.WriteLine("Scheduled " + totalGames + " games over " + totalDays + " days!");
+                }
+                else
+                {
+                    Console.WriteLine("Keeping same schedule");
+                }
             }
         }
     }
