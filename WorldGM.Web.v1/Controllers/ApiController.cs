@@ -92,6 +92,16 @@ namespace WorldGM.Web.v1.Controllers
             }
         }
 
+        [HttpGet("[action]/{id}")]
+        public IEnumerable<City> City(int id)
+        {
+            using (var db = new WebContext())
+            {
+                return db.Cities.Where(x => x.Id == id).ToList();
+
+            }
+        }
+
         [HttpGet("[action]")]
         public IEnumerable<ScheduleViewModel> Schedule()
         {

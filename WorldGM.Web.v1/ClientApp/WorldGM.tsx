@@ -3,23 +3,29 @@ import { RouteComponentProps } from 'react-router';
 
 /* Maps to C# model classes */
 export interface World {
+    id: number;
     name: string;
     currentYear: number;
     continents: Continent[];
 }
 
 export interface Continent {
+    id: number;
     name: string;
     regions: Region[];
 }
 
 export interface Region {
+    id: number;
     name: string;
     cities: City[];
 }
 
 export interface City {
+    id: number;
     name: string;
+    description: string;
+    population: number;
 }
 
 export interface Schedule {

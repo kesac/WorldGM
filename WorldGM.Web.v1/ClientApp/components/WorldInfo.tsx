@@ -40,7 +40,7 @@ export class WorldInfo extends DefaultComponent<World> {
                                 continent.regions.map(region =>
                                     region.cities.map(city =>
                                         <tr>
-                                            <td>{city.name}</td>
+                                            <td><a href={'/city/' + city.id}>{city.name}</a></td>
                                             <td>{region.name}</td>
                                         </tr>
                                     )

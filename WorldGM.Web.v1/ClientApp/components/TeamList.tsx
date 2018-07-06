@@ -25,7 +25,6 @@ export class TeamList extends DefaultComponent<TeamViewModel> {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>City</th>
                             <th>Team</th>
                         </tr>
                     </thead>
@@ -33,8 +32,7 @@ export class TeamList extends DefaultComponent<TeamViewModel> {
                         {
                             teams.map(x =>
                                 <tr>
-                                    <td>{x.city}</td>
-                                    <td><a href={'/team/' + x.id}>{x.name}</a></td>
+                                    <td><a href={'/team/' + x.id}>{x.city} {x.name}</a></td>
                                 </tr>
                             )
                         }
