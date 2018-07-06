@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace WorldGM
 {
@@ -11,10 +8,14 @@ namespace WorldGM
         public int Id { get; set; }
         public int RegionId { get; set; }
 
+        [IgnoreDataMember]
+        public virtual Region Region { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public int Population { get; set; }
 
+        [IgnoreDataMember]
         public virtual List<Team> Teams { get; set; }
 
         // Future: world coordinates

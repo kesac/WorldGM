@@ -31,6 +31,7 @@ namespace WorldGM.DataConsole
             xml.Load(@"E:\Projects\C#\WorldGM\WorldGM.DataConsole\Data\World.xml");
 
             var worldNode = xml.FirstChild;
+            var cityDescriptor = new BasicCityDescriptionGenerator();
 
             using (var db = new AppContext())
             {
@@ -67,7 +68,9 @@ namespace WorldGM.DataConsole
                                             Console.WriteLine("Added city '" + cityName + "'");
 
                                             city.Population = int.Parse(cityNode.Attributes["population"].Value);
+                                            city.Description = cityDescriptor.NextDescription(city);
                                             db.SaveChanges();
+                                            
 
                                             foreach (XmlNode teamNode in cityNode.ChildNodes)
                                             {
