@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using WorldGM.Entities;
 
 namespace WorldGM.Web.v1.ViewModels
 {

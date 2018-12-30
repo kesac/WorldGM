@@ -1,7 +1,5 @@
 ﻿using Rant;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using WorldGM.Entities;
 
 namespace WorldGM.Generation
 {
