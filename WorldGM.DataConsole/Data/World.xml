@@ -14,22 +14,16 @@
         <team name="Knights" shortname="ADK"/>
         <team name="Firebolts" shortname="ADF"/>
       </city>
-      <city name="Solesta" population="800000">
-        <team name="Sabres" shortname="SOL"/>
-      </city>
       <city name="Espern" population="1500000">
         <team name="Spirits" shortname="ESP"/>
       </city>
-      <city name="Kodekai" population="1500000">
-        <team name="Comets" shortname="KDC"/>
+    </region>
+    <region name="Cordelis">
+      <city name="Solesta" population="800000">
+        <team name="Sabres" shortname="SOL"/>
       </city>
       <city name="Galaive" population="1600000">
         <team name="Halberds" shortname="GAL"/>
-      </city>
-    </region>
-    <region name="Cordelis">
-      <city name="Sereun" population="700000">
-        <team name="Casters" shortname="SER"/>
       </city>
       <city name="Dhiem" population="750000">
         <team name="Riders" shortname="DHI"/>
@@ -39,6 +33,14 @@
       </city>
       <city name="Warun" population="500000">
         <team name="Blades" shortname="WAR"/>
+      </city>
+    </region>
+    <region name="Tsuno">
+      <city name="Sereun" population="700000">
+        <team name="Casters" shortname="SER"/>
+      </city>
+      <city name="Kodekai" population="1500000">
+        <team name="Comets" shortname="KDC"/>
       </city>
     </region>
   </continent>
