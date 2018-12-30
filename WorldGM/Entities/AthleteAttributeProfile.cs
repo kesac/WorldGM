@@ -1,5 +1,5 @@
 ﻿
-namespace WorldGM
+namespace WorldGM.Entities
 {
     public class AthleteAttributeProfile
     {

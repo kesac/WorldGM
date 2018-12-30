@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WorldGM
+namespace WorldGM.Entities
 {
     public class World
     {

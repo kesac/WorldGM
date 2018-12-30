@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace WorldGM
+namespace WorldGM.Entities
 {
     public class Region
     {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace WorldGM
+namespace WorldGM.Entities
 {
     public class ScheduledMatch
     {
