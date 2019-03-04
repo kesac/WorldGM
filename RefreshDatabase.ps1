@@ -1,3 +1,7 @@
+# This script recreates the local SQL .db file that test web applications can use.
+# Execute this within the context of project 'WorldGM.DataConsole'.
+
+# Make sure to actually run WorldGM.DataConsole after this script!
 
 $project = "WorldGM.DataConsole"
 $db = "WorldGM.DataConsole/WorldGM_DataConsole_dev.db"
