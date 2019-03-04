@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WorldGM.Data\WorldGM.Data.csproj" />
+    <ProjectReference Include="..\WorldGM.Generation.Text\WorldGM.Generation.Text.csproj" />
     <ProjectReference Include="..\WorldGM\WorldGM.csproj" />
   </ItemGroup>
 

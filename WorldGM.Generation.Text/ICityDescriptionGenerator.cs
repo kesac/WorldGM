@@ -1,8 +1,8 @@
 ﻿using WorldGM.Entities;
 
-namespace WorldGM.Generation
+namespace WorldGM.Generation.Text
 {
-    interface ICityDescriptionGenerator
+    public interface ICityDescriptionGenerator
     {
         string NextDescription(City city);
     }

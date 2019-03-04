@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Rant" Version="3.0.530" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Simulation\" />
   </ItemGroup>
 

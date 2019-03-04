@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{D96F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGM.Test.Generator", "WorldGM.Test.Generator\WorldGM.Test.Generator.csproj", "{A5F6FA09-C860-4803-845E-143E8410A3C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGM.Generation.Text", "WorldGM.Generation.Text\WorldGM.Generation.Text.csproj", "{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{A5F6FA09-C860-4803-845E-143E8410A3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5F6FA09-C860-4803-845E-143E8410A3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5F6FA09-C860-4803-845E-143E8410A3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

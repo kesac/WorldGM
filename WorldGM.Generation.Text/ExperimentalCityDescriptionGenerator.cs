@@ -1,9 +1,9 @@
 ﻿using Rant;
 using WorldGM.Entities;
 
-namespace WorldGM.Generation
+namespace WorldGM.Generation.Text
 {
-    public class BasicCityDescriptionGenerator : ICityDescriptionGenerator
+    public class ExperimentalCityDescriptionGenerator : ICityDescriptionGenerator
     {
         public string NextDescription(City city)
         {

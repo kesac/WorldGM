@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using WorldGM.Entities;
 using WorldGM.Generation;
+using WorldGM.Generation.Text;
 
 namespace WorldGM.DataConsole
 {
@@ -32,7 +33,7 @@ namespace WorldGM.DataConsole
             xml.Load(@"E:\Projects\C#\WorldGM\WorldGM.DataConsole\Data\World.xml");
 
             var worldNode = xml.FirstChild;
-            var cityDescriptor = new BasicCityDescriptionGenerator();
+            var cityDescriptor = new ExperimentalCityDescriptionGenerator();
 
             using (var db = new AppContext())
             {
