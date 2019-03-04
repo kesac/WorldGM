@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGM.Test.Generator", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGM.Generation.Text", "WorldGM.Generation.Text\WorldGM.Generation.Text.csproj", "{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldGM.GameShell", "WorldGM.GameShell\WorldGM.GameShell.csproj", "{9F157372-4ACC-42F4-A814-7A7ACF598A40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9BB7E20-93E7-47B4-9D96-53347B6ADCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F157372-4ACC-42F4-A814-7A7ACF598A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F157372-4ACC-42F4-A814-7A7ACF598A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F157372-4ACC-42F4-A814-7A7ACF598A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F157372-4ACC-42F4-A814-7A7ACF598A40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
