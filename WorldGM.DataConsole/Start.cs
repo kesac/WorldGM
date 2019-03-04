@@ -14,6 +14,7 @@ namespace WorldGM.DataConsole
     {
         private static bool TeamCountChanged { get; set; }
         private static bool ForceScheduleRecreation { get; set; }
+        private static string RootDataFolder = @"E:\Projects\C#\WorldGM\WorldGM.DataConsole\Data";
 
         public static void Main(string[] args)
         {
@@ -24,13 +25,14 @@ namespace WorldGM.DataConsole
             InitializeSchedule();
 
             Console.WriteLine("Initialization complete!");
+            Console.WriteLine("(Press enter to exit)");
             Console.ReadKey();
         }
 
         private static void InitializeWorld()
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(@"E:\Projects\C#\WorldGM\WorldGM.DataConsole\Data\World.xml");
+            xml.Load(RootDataFolder + @"\World.xml");
 
             var worldNode = xml.FirstChild;
             var cityDescriptor = new ExperimentalCityDescriptionGenerator();
@@ -107,7 +109,7 @@ namespace WorldGM.DataConsole
             bool saveIndividually = false;
             using (var db = new AppContext())
             {
-                string[] familyNames = File.ReadAllLines("Data/AstoriaFamilyNames.txt");
+                string[] familyNames = File.ReadAllLines(RootDataFolder + @"\FamilyNames.txt");
 
                 foreach(var name in familyNames)
                 {
@@ -120,7 +122,7 @@ namespace WorldGM.DataConsole
                 
                 Console.WriteLine("Added " + familyNames.Length + " family names");
 
-                string[] feminineNames = File.ReadAllLines("Data/AstoriaFeminineNames.txt");
+                string[] feminineNames = File.ReadAllLines(RootDataFolder + @"\FeminineNames.txt");
 
                 foreach (var name in feminineNames)
                 {
@@ -134,7 +136,7 @@ namespace WorldGM.DataConsole
                 
                 Console.WriteLine("Added " + feminineNames.Length + " feminine names");
 
-                string[] masculineNames = File.ReadAllLines("Data/AstoriaMasculineNames.txt");
+                string[] masculineNames = File.ReadAllLines(RootDataFolder + @"\MasculineNames.txt");
 
                 foreach (var name in masculineNames)
                 {

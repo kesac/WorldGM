@@ -10,7 +10,7 @@ namespace WorldGM.DataConsole
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite("Data Source=WorldGM_DataConsole_dev.db");
+            options.UseSqlite(@"Data Source=E:\Projects\C#\WorldGM\WorldGM.DataConsole\WorldGM_DataConsole_dev.db");
         }
     }
 }
