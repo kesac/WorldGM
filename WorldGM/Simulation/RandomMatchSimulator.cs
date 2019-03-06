@@ -25,7 +25,7 @@ namespace WorldGM.Simulation
                 Home = this.Home,
                 Away = this.Away,
                 HomeScore = r.Next(8),
-                AwayScore = r.Next(3),
+                AwayScore = r.Next(8),
                 Goals = new List<MatchResultGoal>()
             };
 
