@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Archigen" Version="1.1.0" />
+    <PackageReference Include="Syllabore" Version="2.0.0-alpha6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WorldGM\WorldGM.csproj" />
+  </ItemGroup>
+
+</Project>
