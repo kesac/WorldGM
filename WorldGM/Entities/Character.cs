@@ -2,7 +2,7 @@
 
 namespace WorldGM.Entities
 {
-    public class Character : Entity
+    public class Character : IEntity
     {
         public uint Id { get; set; }
         public string FirstName { get; set; }

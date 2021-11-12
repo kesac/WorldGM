@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace WorldGM.Entities
 {
-    public class Guild : Entity
+    public class Guild : IEntity
     {
         public uint Id { get; set; }
         public string Name { get; set; }

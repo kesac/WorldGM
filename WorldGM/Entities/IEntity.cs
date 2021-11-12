@@ -4,9 +4,8 @@ using System.Text;
 
 namespace WorldGM.Entities
 {
-    public interface Entity
+    public interface IEntity
     {
         uint Id { get; }
-        string Name { get; }
     }
 }
