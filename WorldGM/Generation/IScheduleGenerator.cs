@@ -5,6 +5,6 @@ namespace WorldGM.Generation
 {
     public interface IScheduleGenerator
     {
-        Schedule GetSchedule(List<Team> teams);
+        Schedule GetSchedule(List<Guild> teams);
     }
 }

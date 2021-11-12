@@ -21,7 +21,7 @@ namespace WorldGM.Generation
             this.Iterations = 100;
         }
 
-        public Schedule GetSchedule(List<Team> teams)
+        public Schedule GetSchedule(List<Guild> teams)
         {
             var random = new Random();
 
@@ -73,7 +73,7 @@ namespace WorldGM.Generation
         // is reached, it uses a contingency algorithm to fill out the rest of the schedule.
         // The GeneratedResult Success flag is only true if the contingency did not have to
         // be executed.
-        private GeneratedResult GenerateCandidateSchedule(Random random, List<Team> teams)
+        private GeneratedResult GenerateCandidateSchedule(Random random, List<Guild> teams)
         {
             var orderedMatches = new List<ScheduledMatch>();
 
@@ -190,24 +190,24 @@ namespace WorldGM.Generation
 
     public static class ScheduleGeneratorHelper
     {
-        public static IEnumerable<Team> GetTeams(this IEnumerable<ScheduledMatch> matches)
+        public static IEnumerable<Guild> GetTeams(this IEnumerable<ScheduledMatch> matches)
         {
             return matches
-                .Select(x => x.HomeTeam)
-                .Concat(matches.Select(x => x.AwayTeam));
+                .Select(x => x.HomeGuild)
+                .Concat(matches.Select(x => x.AwayGuild));
         }
 
         public static bool HasDuplicateTeams(this IEnumerable<ScheduledMatch> matches)
         {
             return matches
-                .Select(x => x.HomeTeam)
-                .Concat(matches.Select(x => x.AwayTeam))
+                .Select(x => x.HomeGuild)
+                .Concat(matches.Select(x => x.AwayGuild))
                 .GroupBy(x => x)
                 .Where(x => x.Count() > 1)
                 .FirstOrDefault() != null;
         }
 
-        public static IEnumerable<Team> GetDuplicateTeams(this IEnumerable<Team> teams)
+        public static IEnumerable<Guild> GetDuplicateTeams(this IEnumerable<Guild> teams)
         {
             return teams
                 .GroupBy(x => x)

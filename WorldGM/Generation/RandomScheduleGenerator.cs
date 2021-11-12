@@ -5,21 +5,21 @@ using WorldGM.Entities;
 
 namespace WorldGM.Generation
 {
-    public class BasicScheduleGenerator : IScheduleGenerator
+    public class RandomScheduleGenerator : IScheduleGenerator
     {
-        public Schedule GetSchedule(List<Team> teams)
+        public Schedule GetSchedule(List<Guild> guilds)
         {
             // Generate all possible matches if every team plays
             // each other twice, once home and once away
 
             var matches = new List<ScheduledMatch>();
 
-            for (int i = 0; i < teams.Count - 1; i++)
+            for (int i = 0; i < guilds.Count - 1; i++)
             {
-                for (int j = i + 1; j < teams.Count; j++)
+                for (int j = i + 1; j < guilds.Count; j++)
                 {
-                    matches.Add(new ScheduledMatch(teams[i], teams[j]));
-                    matches.Add(new ScheduledMatch(teams[j], teams[i]));
+                    matches.Add(new ScheduledMatch(guilds[i], guilds[j]));
+                    matches.Add(new ScheduledMatch(guilds[j], guilds[i]));
                 }
             }
 
