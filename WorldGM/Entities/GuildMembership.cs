@@ -1,8 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using Loremaker;
+using System.Runtime.Serialization;
 
 namespace WorldGM.Entities
 {
-    public class GuildMembership : IEntity
+    public class GuildMembership : Identifiable
     {
         public uint Id { get; set; }
         public uint GuildId { get; set; }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace WorldGM.Entities
 {
-    public class Guild : IEntity
+    public class Guild : Identifiable
     {
         public uint Id { get; set; }
         public string Name { get; set; }
@@ -14,5 +14,9 @@ namespace WorldGM.Entities
         [IgnoreDataMember]
         public virtual List<GuildMembership> Memberships { get; set; }
 
+        public Guild()
+        {
+            this.Memberships = new List<GuildMembership>();
+        }
     }
 }

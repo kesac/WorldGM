@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Loremaker;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
 namespace WorldGM.Entities
 {
-    public class Schedule : IEntity
+    public class Schedule : Identifiable
     {
         public uint Id { get; set; }
 
@@ -13,7 +14,7 @@ namespace WorldGM.Entities
         public List<ScheduledMatch> ScheduledMatches { get; set; }
     }
 
-    public class ScheduledMatch : IEntity
+    public class ScheduledMatch : Identifiable
     {
         public uint Id { get; set; }
         public int ScheduleId { get; set; }

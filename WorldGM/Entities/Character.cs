@@ -1,8 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using Loremaker;
+using System.Runtime.Serialization;
 
 namespace WorldGM.Entities
 {
-    public class Character : IEntity
+    public class Character : Identifiable
     {
         public uint Id { get; set; }
         public string FirstName { get; set; }
