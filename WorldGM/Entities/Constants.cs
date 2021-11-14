@@ -20,13 +20,13 @@ namespace WorldGM.Entities
     public enum CharacterElement
     {
         Unknown = 0,
-        Spirit = 1,
-        Water = 2,
-        Fire = 3,
-        Earth = 4,
-        Storm = 5,  // ie. Lightning/Sky
-        Light = 6,
-        Darkness = 7
+        Spirit = 1,   // Strong vs elementals
+        Water = 2,    // Strong vs fire
+        Fire = 3,     // Strong vs earth
+        Earth = 4,    // Strong vs storm
+        Storm = 5,    // ie. Lightning/Sky; strong vs water
+        Light = 6,    // Strong vs spirit and darkness
+        Darkness = 7  // Strong vs spirit and light
     }
 
 }
