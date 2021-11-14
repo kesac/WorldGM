@@ -5,33 +5,31 @@ using WorldGM.Entities;
 
 namespace WorldGM.Simulation
 {
-    public class RandomMatchSimulator : IMatchSimulator
+    public class RandomBattleSimulator : IBattleSimulator
     {
-        public Team Home { get; set; }
-        public Team Away { get; set; }
+        public Party PlayerParty { get; set; }
+        public Party EnemyParty { get; set; }
 
-        public RandomMatchSimulator(Team home, Team away)
+        public RandomBattleSimulator(Party playerCharacters, Party enemyCharacters)
         {
-            this.Home = home;
-            this.Away = away;
+            this.PlayerParty = playerCharacters;
+            this.EnemyParty = enemyCharacters;
         }
 
-        public MatchResult Run()
+        public BattleResult Run()
         {
             var r = new Random();
 
-            var result = new MatchResult()
+            var result = new BattleResult()
             {
-                Home = this.Home,
-                Away = this.Away,
-                HomeScore = r.Next(8),
-                AwayScore = r.Next(8),
-                Goals = new List<MatchResultGoal>()
+                PlayerCharacters = this.PlayerParty,
+                EnemyCharacters = this.EnemyParty
             };
 
+            /*
             for(int i = 0; i < result.HomeScore; i++)
             {
-                var goalScorer = this.Home.TeamContracts[r.Next(this.Home.TeamContracts.Count)].Athlete;
+                var goalScorer = this.Home.Memberships[r.Next(this.Home.Memberships.Count)].Character;
 
                 result.Goals.Add(new MatchResultGoal()
                 {
@@ -44,7 +42,7 @@ namespace WorldGM.Simulation
             for (int i = 0; i < result.AwayScore; i++)
             {
 
-                var goalScorer = this.Away.TeamContracts[r.Next(this.Away.TeamContracts.Count)].Athlete;
+                var goalScorer = this.Away.Memberships[r.Next(this.Away.Memberships.Count)].Character;
 
                 result.Goals.Add(new MatchResultGoal()
                 {
@@ -52,6 +50,7 @@ namespace WorldGM.Simulation
                     GoalScorer = goalScorer
                 });
             }
+            */
 
             return result;
         }

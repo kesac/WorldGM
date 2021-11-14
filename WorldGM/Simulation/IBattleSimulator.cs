@@ -5,8 +5,8 @@ using WorldGM.Entities;
 
 namespace WorldGM.Simulation
 {
-    public interface IMatchSimulator
+    public interface IBattleSimulator
     {
-        MatchResult Run();
+        BattleResult Run();
     }
 }
