@@ -7,8 +7,8 @@ namespace WorldGM.Simulation
 {
     public class BattleResult
     {
-        public Party PlayerCharacters { get; set; }
-        public Party EnemyCharacters { get; set; }
+        public CombatParty PlayerCharacters { get; set; }
+        public CombatParty EnemyCharacters { get; set; }
         public bool Victory { get; set; }
         public int Experience { get; set; }
 
