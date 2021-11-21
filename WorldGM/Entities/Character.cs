@@ -15,12 +15,14 @@ namespace WorldGM.Entities
         public CharacterElement Element { get; set; }
         [IgnoreDataMember]
         public virtual GuildMembership Membership { get; set; }
-        public int Strength { get; set; }      // Atk and Def
+
+        public int Level { get; set; }
+        public int Strength { get; set; }      // P.Atk and P.Def
         public int Intelligence { get; set; }  // M.Atk and M.Def
         public int Dexterity { get; set; }     // Ability to apply debuffs
         public int Resistance { get; set; }    // Resistance to debuffs
         public int Speed { get; set; }         // Turn frequency
-        public int Endurance { get; set; }     // HP
+        public int Vitality { get; set; }     // HP
 
     }
 }
