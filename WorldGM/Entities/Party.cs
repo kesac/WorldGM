@@ -19,5 +19,11 @@ namespace WorldGM.Entities
             this.CharacterIds = new List<uint>();
             this.Characters = new List<Character>();
         }
+
+        public void Add(Character c)
+        {
+            this.CharacterIds.Add(c.Id);
+            this.Characters.Add(c);
+        }
     }
 }
