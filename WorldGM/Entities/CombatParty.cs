@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace WorldGM.Entities
@@ -7,6 +8,13 @@ namespace WorldGM.Entities
     public class CombatParty
     {
         public List<CombatEntity> CombatEntities { get; set; }
+        public bool IsAlive
+        {
+            get
+            {
+                return this.CombatEntities.Any(x => x.IsAlive);
+            }
+        }
 
         public CombatParty(Party basis)
         {
@@ -14,7 +22,8 @@ namespace WorldGM.Entities
 
             foreach(var character in basis.Characters)
             {
-                this.CombatEntities.Add(new CombatEntity(character));
+                var e = new CombatEntity(character) { Party = this };
+                this.CombatEntities.Add(e);
             }
         }
 
