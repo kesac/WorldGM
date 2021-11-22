@@ -1,32 +1,72 @@
 ﻿
 namespace WorldGM.Entities
 {
+    // TODO: Ensure serialization of these enums does
+    // not take into account the order they are defined
+    public static class Constants
+    {
+        public static readonly int VitalityToHpMultiplier = 10;
+    }
 
     public enum GuildMembershipType
     {
-        Unknown = 0,
-        Temporary = 1,
-        Permanent = 2
+        None,
+        Temporary,
+        Permanent
+    }
+
+    public enum CharacterAttribute
+    {
+        None,
+        Level,
+        Strength,
+        Intelligence,
+        Dexterity,
+        Resistance,
+        Speed,
+        Vitality
     }
 
     public enum CharacterAppearance
     {
-        Unknown = 0,
-        Neutral = 1,
-        Feminine = 2,
-        Masculine = 3
+        None,
+        Neutral,
+        Feminine,
+        Masculine
     }
 
     public enum CharacterElement
     {
-        Unknown = 0,
-        Spirit = 1,   // Strong vs elementals
-        Water = 2,    // Strong vs fire
-        Fire = 3,     // Strong vs earth
-        Earth = 4,    // Strong vs storm
-        Storm = 5,    // ie. Lightning/Sky; strong vs water
-        Light = 6,    // Strong vs spirit and darkness
-        Darkness = 7  // Strong vs spirit and light
+        None,
+        Spirit,   // Strong vs elementals
+        Water,    // Strong vs fire
+        Fire,     // Strong vs earth
+        Earth,    // Strong vs storm
+        Storm,    // ie. Lightning/Sky; strong vs water
+        Light,    // Strong vs spirit and darkness
+        Darkness  // Strong vs spirit and light
+    }
+
+    public enum AbilityActionType
+    {
+        None,
+        PhysicalAttack,
+        MagicAttack,
+        Heal,
+        Buff,
+        Debuff
+    }
+
+    public enum TargetType
+    {
+        None,
+        Self,
+        AllyAll,
+        AllyRandom,
+        AllyLowestHealth,
+        EnemyAll,
+        EnemyRandom,
+        EnemyLowestHealth
     }
 
 }
