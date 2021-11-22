@@ -23,6 +23,7 @@ namespace WorldGM.Generation
                 .ForProperty<int>(x => x.Resistance, 1)
                 .ForProperty<int>(x => x.Speed, 1)
                 .ForProperty<int>(x => x.Vitality, 1)
+                .ForProperty<Ability>(x => x.PrimaryAbility, Ability.DefaultAbility)
                 .ForProperty<CharacterAppearance>(x => x.Appearance, CharacterAppearance.Neutral)
                 .ForProperty<CharacterElement>(x => x.Element, CharacterElement.Fire);
         }
