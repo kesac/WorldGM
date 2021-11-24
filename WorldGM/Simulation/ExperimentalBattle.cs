@@ -9,8 +9,8 @@ namespace WorldGM.Simulation
 {
     public class ExperimentalBattle : IBattleSimulator
     {
-        private CombatParty PlayerParty;
-        private CombatParty EnemyParty;
+        public CombatParty PlayerParty { get; set; }
+        public CombatParty EnemyParty { get; set; }
         private Random Random;
         private List<CombatEntity> AllCombatEntities;
 
@@ -26,21 +26,22 @@ namespace WorldGM.Simulation
             this.Random = new Random();
         }
 
-        private bool BothSidesAlive()
+        private bool IsBothSidesAlive()
         {
-            return this.PlayerParty.CombatEntities.Any(x => x.RemainingHp > 0)
-                 && this.EnemyParty.CombatEntities.Any(x => x.RemainingHp > 0);
+            return this.PlayerParty.IsAlive && this.EnemyParty.IsAlive;
         }
 
-        private void ProgressActionBars()
+        private void FillActionBarsToNextTurn()
         {
             // Find character who will reach 100% in their action bar
             // the fastest
 
-            float ticksToNextAction = float.MaxValue;
-            CombatEntity nextToAct = this.AllCombatEntities.FirstOrDefault();
+            var ticksToNextAction = float.MaxValue;
+            var aliveEntities = this.AllCombatEntities.Where(x => x.IsAlive);
 
-            foreach(var e in this.AllCombatEntities)
+            var nextToAct = aliveEntities.FirstOrDefault();
+
+            foreach(var e in aliveEntities)
             {
                 var current = e.ActionBar;
                 var ticksRequired = (100 - current) / e.Character.Speed;
@@ -52,47 +53,89 @@ namespace WorldGM.Simulation
                 }
             }
 
-            foreach(var e in this.AllCombatEntities)
+            // Progress everyone's action bars until the fastest
+            // character's bar is full
+
+            foreach(var e in aliveEntities)
             {
                 e.ActionBar = e.ActionBar + (e.Character.Speed * ticksToNextAction);
             }
 
         }
 
-        public CombatEntity GetNextActingEntity()
+        private CombatEntity GetNextActingEntity()
         {
-            var max = this.AllCombatEntities.Max(x => x.ActionBar);
-            return this.AllCombatEntities.FirstOrDefault(x => x.ActionBar == max);
+            var alive = this.AllCombatEntities.Where(x => x.IsAlive);
+            var max = alive.Max(x => x.ActionBar);
+            return alive.FirstOrDefault(x => x.ActionBar == max);
+        }
+
+        private void ExecuteAction(CombatEntity e)
+        {
+            var ability = e.Character.PrimaryAbility;
+
+            foreach(var action in ability.Actions)
+            {
+                var target = this.GetTarget(e, action.TargetType);
+
+                if(action.Type == AbilityActionType.PhysicalAttack)
+                {
+                    var physAttack = e.Character.Strength;  // TODO: + equipment
+                    var physDefense = e.Character.Strength; // TODO: + equipment
+
+                    // TODO: Affinity multiplier
+
+                    var defensiveMultiplier = ((float)(physAttack + target.Character.Level * 3) / (physDefense + (target.Character.Level*2)));
+                    var minDamage = (int)(physAttack * action.MinMultiplier * defensiveMultiplier);
+                    var maxDamage = (int)(physAttack * action.MaxMultiplier * defensiveMultiplier);
+                    var damage = this.Random.Next(minDamage, maxDamage + 1);
+
+                    target.RemainingHp -= System.Math.Max(damage, 1);
+                    Console.WriteLine("{0} [{1}] attacked {2} [{3}] with {4} for {5} damage!", e.Character.Name, e.RemainingHp, target.Character.Name, target.RemainingHp, ability.Name, damage);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+                
+            }
+
+            e.ActionBar = 0;
+        }
+
+        private CombatEntity GetTarget(CombatEntity source, TargetType targetType)
+        {
+            if(targetType == TargetType.EnemyRandom)
+            {
+                if(source.Party == this.PlayerParty)
+                {
+                    return this.EnemyParty.CombatEntities.Where(x => x.IsAlive).ToList().GetRandom<CombatEntity>();
+                }
+                else
+                {
+                    return this.PlayerParty.CombatEntities.Where(x => x.IsAlive).ToList().GetRandom<CombatEntity>();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public BattleResult Run()
         {
 
-            int turns = 0;
-            int maxTurns = 10;
-
-            while(this.BothSidesAlive())
+            while (this.IsBothSidesAlive())
             {
-                this.ProgressActionBars();
-                var e = this.GetNextActingEntity();
-
-                Console.WriteLine("Next turn was {0} at {1} speed", e.Character.Name, e.Character.Speed);
-                e.ActionBar = 0;
-
-                turns++;
-
-                if(turns >= maxTurns)
-                {
-                    break;
-                }
-
+                this.FillActionBarsToNextTurn();
+                this.ExecuteAction(this.GetNextActingEntity());
             }
 
             var result = new BattleResult()
             {
                 PlayerCharacters = this.PlayerParty,
                 EnemyCharacters = this.EnemyParty,
-                Victory = true
+                Victory = this.PlayerParty.IsAlive
             };
 
             return result;
